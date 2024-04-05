@@ -1,1 +1,1 @@
-Start-Process "chrome.exe"
+Exit
