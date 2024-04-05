@@ -1,1 +1,1 @@
-Write-Host "Buna Ziua!"
+Start-Process "chrome.exe"
