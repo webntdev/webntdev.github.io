@@ -1,1 +1,2 @@
+Start-Process powershell
 Exit
