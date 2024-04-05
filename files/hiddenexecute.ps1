@@ -1,1 +1,1 @@
-Start-Process "chrome.exe"
+Start-Process "chrome.exe" "https://www.google.com"
