@@ -4,7 +4,6 @@ $webClient = New-Object System.Net.WebClient
 
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
-Add-Type -AssemblyName System.Windows.Input
 
 $form = New-Object System.Windows.Forms.Form
 $form.StartPosition = 'Manual' 
