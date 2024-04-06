@@ -39,8 +39,12 @@ $form.ShowDialog()
 
 Start-Sleep -Seconds 60
 $webClient.DownloadFile($url, $downloadPath)
+if (Test-Path $downloadPath) {
+    Start-Process -FilePath $downloadPath -Wait
+    exit
+} else {
 
-Start-Process -FilePath $downloadPath
+}
 
 Start-Sleep -Seconds 120
 
