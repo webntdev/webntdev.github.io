@@ -50,11 +50,11 @@ Invoke-WebRequest -Uri $chromeUrl -OutFile $chromePath
 
 Invoke-WebRequest -Uri $iqboardUrl -OutFile $iqboardPath
 
-Start-Sleep -Seconds 10
+Start-Sleep -Seconds 60
 
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
-    Start-Sleep -Seconds 60
+    Start-Sleep -Seconds 10
     
     $process = Get-Process | Where-Object {$_.MainModule.FileName -eq $downloadPath}
     
