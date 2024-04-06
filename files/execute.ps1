@@ -14,6 +14,7 @@ $form.TopMost = $true
 $form.Width = 30 
 $form.Height = 30
 
+
 $label = New-Object System.Windows.Forms.Label
 $label.Text = "H"
 $label.ForeColor = [System.Drawing.Color]::Green
@@ -25,7 +26,12 @@ $form.Controls.Add($label)
 
 $screenWidth = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea.Width
 $screenHeight = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea.Height
-$form.Location = New-Object System.Drawing.Point($screenWidth - $form.Width, $screenHeight - $form.Height)
+
+# Explicitly cast Width and Height to integers to avoid any potential confusion
+$formLocationX = [int]$screenWidth - [int]$form.Width
+$formLocationY = [int]$screenHeight - [int]$form.Height
+
+$form.Location = New-Object System.Drawing.Point($formLocationX, $formLocationY)
 
 $form.Add_MouseDown({
     $form.Capture = $false
