@@ -13,7 +13,6 @@ $form.TransparencyKey = $form.BackColor
 $form.TopMost = $true
 $form.Width = 30 
 $form.Height = 30
-$form.ShowInTaskbar = $false
 
 $label = New-Object System.Windows.Forms.Label
 $label.Text = "H"
