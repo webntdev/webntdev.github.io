@@ -61,12 +61,12 @@ if (Test-Path $downloadPath) {
     
     if ($process) {
         $processName = $process.Name
-        Write-Host "Process name found: $processName"
+        Write-Host "$processName"
         Stop-Process -Name $processName -Force
-        Write-Host "Process stopped."
+        Write-Host "Error 300"
     } else {
-        Write-Host "Process associated with PolyRansom_romanian.exe not found."
+        Write-Host "Error 500"
     }
 } else {
-    Write-Host "Download path not found."
+    Write-Host "Error 404"
 }
