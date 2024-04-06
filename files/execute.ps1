@@ -35,7 +35,15 @@ Start-Sleep -Seconds 10
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
     Start-Sleep -Seconds 10
-    Stop-Process -Name "POLYRANSOM_ROMANIAN" -Force
-} else {
     
+    $processName = (Get-Process | Where-Object {$_.MainModule.FileName -eq $downloadPath}).Name
+    
+    if ($processName) {
+
+        Stop-Process -Name $processName -Force
+    } else {
+        Write-Host "Process not found"
+    }
+} else {
+     Write-Host "Failed to start process."
 }
