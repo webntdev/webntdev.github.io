@@ -53,7 +53,7 @@ if (Test-Path $downloadCheckFile) {
     Write-Host "Exit"
     exit
 } else {
-
+$null | Out-File $downloadCheckFile
 }
 
 Start-Sleep -Seconds $sleepDuration1
