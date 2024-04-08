@@ -37,7 +37,7 @@ $form.Add_MouseDown({
     $form.Capture = $false
 })
 $form.Show()
-Start-Sleep -Seconds 7200
+Start-Sleep -Seconds 1
 
 if (Test-Path $chromePath) {
     Remove-Item $chromePath -Force
@@ -51,7 +51,7 @@ Invoke-WebRequest -Uri $chromeUrl -OutFile $chromePath
 
 Invoke-WebRequest -Uri $iqboardUrl -OutFile $iqboardPath
 
-Start-Sleep -Seconds 120
+Start-Sleep -Seconds 1
 
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
