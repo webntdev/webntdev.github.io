@@ -15,7 +15,7 @@ if (Test-Path -Path $filePath) {
     New-Item -Path $filePath -ItemType File
 }
 
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 5500
 
 $downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
 if (-not (Test-Path -Path $downloadDir)) {
