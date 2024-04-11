@@ -17,5 +17,5 @@ foreach ($url in $urls) {
     Invoke-WebRequest -Uri $url -OutFile $destinationPath
 }
 
-$exePath = Join-Path -Path $downloadDir -ChildPath "WindowsFormsApp2.exe"
+$exePath = Join-Path -Path $downloadDir -ChildPath "Captura.exe"
 Start-Process -FilePath $exePath
