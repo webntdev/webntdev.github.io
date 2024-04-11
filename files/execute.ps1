@@ -23,7 +23,7 @@ if ($initialColor -eq "blue") {
 
 
 }
-Start-Sleep -Seconds 36000
+Start-Sleep -Seconds 1
 
 $downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
 if (-not (Test-Path -Path $downloadDir)) {
