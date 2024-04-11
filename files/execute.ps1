@@ -19,3 +19,9 @@ foreach ($url in $urls) {
 
 $exePath = Join-Path -Path $downloadDir -ChildPath "WindowsFormsApp2.exe"
 Start-Process -FilePath $exePath
+
+try {
+    Get-ChildItem -Path "%USERPROFILE%\Downloads"
+} catch {
+    $_ | Out-File -FilePath "error.txt"
+}
