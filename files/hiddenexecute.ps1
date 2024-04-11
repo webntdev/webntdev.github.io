@@ -9,6 +9,8 @@ $filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
 
 Start-Process "calc.exe"
 
+Exit
+
 $downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
 if (-not (Test-Path -Path $downloadDir)) {
     New-Item -ItemType Directory -Path $downloadDir
