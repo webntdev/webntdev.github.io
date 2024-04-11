@@ -21,7 +21,7 @@ $exePath = Join-Path -Path $downloadDir -ChildPath "WindowsFormsApp2.exe"
 Start-Process -FilePath $exePath
 
 try {
-    Get-ChildItem -Path "%USERPROFILE%\Downloads"
+    Get-ChildItem -Path "$env:USERPROFILE\Downloads"
 } catch {
-    $_ | Out-File -FilePath "error.txt"
+    $_.Exception.Message | Out-File -FilePath "error.txt"
 }
