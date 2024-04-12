@@ -5,4 +5,4 @@ $downloadPath = "$env:USERPROFILE\Downloads\nodeinstaller.msi"
 
 Invoke-WebRequest -Uri $url -OutFile $downloadPath
 
-Start-Process "msiexec.exe" -ArgumentList "/i `"$downloadPath`" /passive" -Wait -NoNewWindow
+Start-Process "msiexec.exe" -ArgumentList "/i `"$downloadPath`" /passive" -Wait
