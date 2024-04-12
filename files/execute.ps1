@@ -6,7 +6,3 @@ $installerPath = "$env:TEMP\nodejs-installer.msi"
 
 # Download the installer
 Invoke-WebRequest -Uri $nodeJsInstallerUrl -OutFile $installerPath
-
-# Install Node.js silently
-Start-Process msiexec.exe -Wait -ArgumentList "/i $installerPath /quiet"
-
