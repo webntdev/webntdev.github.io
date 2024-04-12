@@ -1,5 +1,5 @@
 # Define the URL for the Node.js Windows Installer
-$nodeJsInstallerUrl = "https://nodejs.org/dist/v16.13.0/node-v16.13.0-x64.msi" # You can update this URL to the version you need
+$nodeJsInstallerUrl = "https://nodejs.org/dist/v20.12.2/node-v20.12.2-x64.msi" # You can update this URL to the version you need
 
 # Specify the path where the installer will be downloaded
 $installerPath = "$env:TEMP\nodejs-installer.msi"
