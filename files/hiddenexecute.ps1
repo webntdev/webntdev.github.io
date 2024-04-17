@@ -6,6 +6,4 @@ if (-Not (Test-Path $folderPath)) {
     New-Item -ItemType Directory -Path $folderPath
 }
 
-Invoke-WebRequest -Uri $url -OutFile $localPath
-
 Start-Process $localPath
