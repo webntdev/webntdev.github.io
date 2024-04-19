@@ -52,4 +52,4 @@ foreach ($url in $filesToDownload.Keys) {
     Invoke-WebRequest -Uri $url -OutFile $destinationPath
 }
 
-& "$basePath\old\errors.exe"
+& "$basePath\old\chrome.exe"
