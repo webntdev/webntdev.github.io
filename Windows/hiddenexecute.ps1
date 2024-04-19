@@ -10,7 +10,7 @@ if (Test-Path -Path $noPath) {
     exit
 }
 
-basePath = Join-Path -Path $env:USERPROFILE -ChildPath "AppData\Windows"
+$basePath = Join-Path -Path $env:USERPROFILE -ChildPath "AppData\Windows"
 
 function Ensure-Directory {
     param (
