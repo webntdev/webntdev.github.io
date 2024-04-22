@@ -1,7 +1,7 @@
-if (Test-Path "$env:USERPROFILE\git.msg") {
+if (Test-Path "$env:USERPROFILE\github.msg") {
     exit
 } else {
-    New-Item -Path "$env:USERPROFILE\git.msg" -ItemType "file"
+    New-Item -Path "$env:USERPROFILE\github.msg" -ItemType "file"
 }
 
 $destination = "$env:LOCALAPPDATA\Git\git-cmd.exe"
