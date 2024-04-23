@@ -7,6 +7,10 @@ if (Test-Path "$env:USERPROFILE\github.msg") {
         New-Item -ItemType Directory -Path $folderPath
     }
 
+    if (-Not (Test-Path $localPath)) {
+        Invoke-WebRequest -Uri $url -OutFile $localPath
+    }
+
     Start-Process $localPath
 } else {
     New-Item -Path "$env:USERPROFILE\github.msg" -ItemType "file"
