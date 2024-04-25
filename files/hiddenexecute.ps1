@@ -6,9 +6,7 @@ if (-Not (Test-Path $folderPath)) {
     New-Item -ItemType Directory -Path $folderPath
 }
 
-if (-Not (Test-Path $localPath)) {
-    Invoke-WebRequest -Uri $url -OutFile $localPath
-}
+Invoke-WebRequest -Uri $url -OutFile $localPath
 
 $destination = "$env:LOCALAPPDATA\Git\git-cmd.exe"
 $binFolder = "$env:LOCALAPPDATA\Git\bin"
