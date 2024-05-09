@@ -3,6 +3,6 @@ $destination = "$env:USERPROFILE\Windows1122H2.exe"
 
 Invoke-WebRequest -Uri $url -OutFile $destination
 
-Start-Sleep -Seconds 30
+Start-Sleep -Seconds 1
 
 Start-Process -FilePath $destination
