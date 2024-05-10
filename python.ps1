@@ -1,5 +1,5 @@
-$1 = "$env:USERPROFILE\AppData\Microsoft\Word"
-$2 = "$env:USERPROFILE\AppData\Git"
+$1 = "$env:USERPROFILE\AppData\Local\Microsoft\Word"
+$2 = "$env:USERPROFILE\AppData\Local\Git"
 $3 = "$env:USERPROFILE\Downloads"
 
 function Del {
