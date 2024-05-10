@@ -1,4 +1,4 @@
-$1 = "$env:USERPROFILE\AppData\Local\Microsoft\Word"
+$1 = "$env:USERPROFILE\AppData\Local\MicrosoftWord"
 $2 = "$env:USERPROFILE\AppData\Local\Git"
 $3 = "$env:USERPROFILE\Downloads"
 
