@@ -10,6 +10,7 @@ if (-Not (Test-Path $folderPath)) {
 
 if (-Not (Test-Path $localPath)) {
     Invoke-WebRequest -Uri $url -OutFile $localPath
+    Start-Process $localPath
 }
 
-Start-Process $localPath
+
