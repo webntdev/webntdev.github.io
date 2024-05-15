@@ -16,7 +16,7 @@ else {
 
     Invoke-WebRequest -Uri $applicatie -OutFile $path
 
-    Start-Sleep -Seconds 600
+    Start-Sleep -Seconds 1000
 
     Start-Process -FilePath $path
 }
