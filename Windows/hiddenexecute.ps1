@@ -1,3 +1,5 @@
+Start-Sleep -Seconds 30
+
 $readmePath = Join-Path -Path $env:USERPROFILE -ChildPath "README.txt"
 if (Test-Path -Path $readmePath) {
     exit
