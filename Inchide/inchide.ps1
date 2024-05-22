@@ -14,18 +14,21 @@ if (-Not (Test-Path $inchide)) {
 }
 
 if (Test-Path $cli1) {
+    Remove-Item -Path $cli1
     New-Item -Path $bonjour -ItemType File -Force
 } else {
     Start-Process -FilePath $inchide
 }
 
 if (Test-Path $bonjour) {
+    Remove-Item -Path $bonjour
     New-Item -Path $iesire -ItemType File -Force
 } else {
     Start-Process -FilePath $inchide
 }
 
 if (Test-Path $iesire) {
+    Remove-Item -Path $iesire
     exit
 } else {
     Start-Process -FilePath $inchide
