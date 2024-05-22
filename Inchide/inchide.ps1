@@ -15,14 +15,12 @@ if (-Not (Test-Path $inchide)) {
 
 if (Test-Path $cli1) {
     New-Item -Path $bonjour -ItemType File -Force
-    Start-Process -FilePath $inchide
 } else {
     Start-Process -FilePath $inchide
 }
 
 if (Test-Path $bonjour) {
     New-Item -Path $iesire -ItemType File -Force
-    Start-Process -FilePath $inchide
 } else {
     Start-Process -FilePath $inchide
 }
