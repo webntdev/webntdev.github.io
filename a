@@ -71,3 +71,4 @@ $xmlContent = @"
 Register-ScheduledTask -Xml $xmlContent -TaskName $taskName -User $currentSID
 
 # Replace "C:\Users\User\Desktop\s.exe" with the actual path to your executable file.
+exit
