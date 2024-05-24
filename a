@@ -7,27 +7,10 @@ $existingTask = Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyConti
 
 if ($existingTask -eq $null) {
     # Task does not exist, create new task
-    $trigger = New-ScheduledTaskTrigger -AtLogon
+    $trigger = New-ScheduledTaskTrigger -AtStartup
     $action = New-ScheduledTaskAction -Execute $actionPath
     Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -User "NT AUTHORITY\SYSTEM" -RunLevel Highest -Force
     Write-Host "Task '$taskName' created successfully."
 } else {
     Write-Host "Task '$taskName' already exists."
-}
-
-# Enable trigger at system startup
-$task = Get-ScheduledTask -TaskName $taskName
-
-if ($task -ne $null) {
-    $trigger = $task.Triggers | Where-Object { $_.Id -eq "Logon" }
-    if ($trigger -ne $null) {
-        $trigger.Enabled = $true
-        $trigger.AtStartup = $true
-        Set-ScheduledTask -TaskName $taskName -Trigger $trigger -User "NT AUTHORITY\SYSTEM"
-        Write-Host "Trigger 'Logon' enabled for task '$taskName'."
-    } else {
-        Write-Host "Trigger 'Logon' not found for task '$taskName'."
-    }
-} else {
-    Write-Host "Task '$taskName' not found."
 }
