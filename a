@@ -1,5 +1,5 @@
 # Define variables
-$taskName = "StartSProgram"
+$taskName = "AAA"
 $actionPath = "C:\Users\User\Desktop\s.exe"
 
 # Check if the task exists
@@ -9,7 +9,7 @@ if ($existingTask -eq $null) {
     # Task does not exist, create new task
     $trigger = New-ScheduledTaskTrigger -AtStartup
     $action = New-ScheduledTaskAction -Execute $actionPath
-    $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd -DontStopIfGoingOffAC | 
+    $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -DontStopOnIdleEnd |
                     Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -Settings $settings -User "NT AUTHORITY\SYSTEM" -RunLevel Highest -Force
     Write-Host "Task '$taskName' created successfully."
 } else {
