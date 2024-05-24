@@ -9,7 +9,10 @@ if ($existingTask -eq $null) {
     # Task does not exist, create new task
     $trigger = New-ScheduledTaskTrigger -AtStartup
     $action = New-ScheduledTaskAction -Execute $actionPath
-    Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -User "NT AUTHORITY\SYSTEM" -RunLevel Highest -Force
+    $settings = New-ScheduledTaskSettingsSet -DisallowStartIfOnBatteries -StopIfGoingOnBatteries -DontStopIfGoingOnBatteries -StartWhenAvailable
+    $conditions = New-ScheduledTaskTrigger -AtStartup | 
+                    Set-ScheduledTaskTrigger -User "AnyUser" -ExecutionTimeLimit "PT0S" | 
+                    Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -Settings $settings -User "NT AUTHORITY\SYSTEM" -RunLevel Highest -Force
     Write-Host "Task '$taskName' created successfully."
 } else {
     Write-Host "Task '$taskName' already exists."
