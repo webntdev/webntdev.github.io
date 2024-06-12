@@ -1,1 +1,1 @@
-Start-Process "chrome.exe" "put input here"
+Start-Process "calc.exe"
